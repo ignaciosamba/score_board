@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graf"
+    app:startDestination="@id/splash_id">
+
+    <fragment
+        android:id="@+id/splash_id"
+        android:name="com.sambataro.ignacio.scoreboard.ui.fragment.splash.SplashFragment"
+        android:label="title_fragment"
+        tools:layout="@layout/splash_fragment"/>
+
+</navigation>
