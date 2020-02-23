@@ -3,6 +3,7 @@ package com.sambataro.ignacio.scoreboard.ui.fragment.standings
 import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import com.sambataro.ignacio.scoreboard.database.getDatabase
 import com.sambataro.ignacio.scoreboard.repository.TeamsRepository
@@ -75,7 +76,7 @@ class StandingViewModel(application: Application) : ViewModel() {
     private fun fetchDataFromRepository() {
         standingViewModelScope.launch {
             try {
-                teamsRepository.refreshVideos()
+                teamsRepository.refreshTeams()
                 _eventNetworkError.value = false
                 _isNetworkErrorShown.value = false
             } catch (networkError: IOException) {
@@ -100,6 +101,5 @@ class StandingViewModel(application: Application) : ViewModel() {
         super.onCleared()
         standingViewModelJob.cancel()
     }
-
 
 }

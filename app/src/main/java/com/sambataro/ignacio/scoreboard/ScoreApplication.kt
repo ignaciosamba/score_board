@@ -32,7 +32,7 @@ class ScoreApplication : Application() {
      * Setup all the WorkManager to fetch the data.
      */
     private fun setupRecurringWork() {
-        //TODO: setup the worker to fetch the teams data.
+
         val repeatingRequest = PeriodicWorkRequestBuilder<NetworkWorker>(10,
             TimeUnit.MINUTES)
             .build()

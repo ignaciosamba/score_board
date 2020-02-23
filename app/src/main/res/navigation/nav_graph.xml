@@ -9,6 +9,16 @@
         android:id="@+id/splash_id"
         android:name="com.sambataro.ignacio.scoreboard.ui.fragment.splash.SplashFragment"
         android:label="title_fragment"
-        tools:layout="@layout/splash_fragment"/>
+        tools:layout="@layout/splash_fragment">
+        <action
+            android:id="@+id/action_showStandingFragment"
+            app:destination="@id/standing_id" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/standing_id"
+        android:name="com.sambataro.ignacio.scoreboard.ui.fragment.standings.StandingFragment"
+        android:label="title_fragment"
+        tools:layout="@layout/standing_fragment"/>
 
 </navigation>

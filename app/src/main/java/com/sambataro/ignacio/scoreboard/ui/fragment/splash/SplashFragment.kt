@@ -6,7 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
 import com.sambataro.ignacio.scoreboard.R
 import com.sambataro.ignacio.scoreboard.databinding.SplashFragmentBinding
 
@@ -14,7 +17,18 @@ class SplashFragment : Fragment() {
 
     private lateinit var binding : SplashFragmentBinding
 
-    private lateinit var viewModel: SplashViewModel
+    /**
+     * One way to delay creation of the viewModel until an appropriate lifecycle method is to use
+     * lazy. This requires that viewModel not be referenced before onActivityCreated, which we
+     * do in this Fragment.
+     */
+    private val viewModel: SplashViewModel by lazy {
+        val activity = requireNotNull(this.activity) {
+            "You can only access the viewModel after onActivityCreated()"
+        }
+        ViewModelProvider(this, SplashViewModelFactory(activity.application))
+            .get(SplashViewModel::class.java)
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -26,10 +40,16 @@ class SplashFragment : Fragment() {
             container,
             false
         )
+        // Set the lifecycleOwner so DataBinding can observe LiveData
+        binding.setLifecycleOwner(viewLifecycleOwner)
 
-        // Get the viewModel
-        viewModel = ViewModelProvider(this).get(SplashViewModel::class.java)
-
+        viewModel.sendUserToStandingFragment.observe(viewLifecycleOwner, Observer {
+            if ( null != it ) {
+                this.findNavController()
+                    .navigate(SplashFragmentDirections.actionShowStandingFragment())
+                viewModel.displayMainFragmentDone()
+            }
+        })
 
         return binding.root
     }

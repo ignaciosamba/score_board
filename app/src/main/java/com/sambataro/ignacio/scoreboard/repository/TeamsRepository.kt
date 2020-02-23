@@ -1,5 +1,6 @@
 package com.sambataro.ignacio.scoreboard.repository
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import com.sambataro.ignacio.scoreboard.database.ScoreBoardDataBase
@@ -10,6 +11,7 @@ import com.sambataro.ignacio.scoreboard.network.TeamsNetwork
 import com.sambataro.ignacio.scoreboard.network.asDatabaseModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import java.lang.Exception
 
 
 class TeamsRepository(private val database : ScoreBoardDataBase) {
@@ -28,10 +30,16 @@ class TeamsRepository(private val database : ScoreBoardDataBase) {
     /**
      * Refresh the videos stored in the offline cache.
      */
-    suspend fun refreshVideos() {
+    suspend fun refreshTeams() {
         withContext(Dispatchers.IO) {
-            val playlist = TeamsNetwork.teamsResponse.getTeamList().await()
-            database.teamsDao.insertAll(playlist.asDatabaseModel())
+            Log.d("SAMBA1", "About to call the getTeamList")
+            try {
+                val teamList = TeamsNetwork.teamsResponse.getTeamList().await()
+                database.teamsDao.insertAll(teamList.asDatabaseModel())
+                Log.d("SAMBA1", "the awnser of the getTeamList is: " + teamList.sports[0].id)
+            } catch (e : Exception) {
+                Log.e("SAMBA1", "error with retrofit: $e")
+            }
         }
     }
 

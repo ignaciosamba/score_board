@@ -8,7 +8,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 
 
-val NBA_BASE = "http://site.api.espn.com/apis/site/v2/sports/basketball/nba/"
+val NBA_BASE = "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/"
 
 
 /**
