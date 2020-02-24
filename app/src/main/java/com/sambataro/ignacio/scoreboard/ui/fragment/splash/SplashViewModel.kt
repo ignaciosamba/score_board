@@ -31,10 +31,10 @@ class SplashViewModel(application: Application) : ViewModel() {
     private val splashViewModelScope = CoroutineScope(splashViewModelJob +
             Dispatchers.Main)
 
-    private val _sendUserToStandingFragment = MutableLiveData<Boolean>(true)
+    private val _sendUserToSelectorFragment = MutableLiveData<Boolean>()
 
-    val sendUserToStandingFragment : LiveData<Boolean>
-        get() = _sendUserToStandingFragment
+    val sendUserToSelectorFragment : LiveData<Boolean>
+        get() = _sendUserToSelectorFragment
 
     init {
         fetchTeamsData()
@@ -44,7 +44,8 @@ class SplashViewModel(application: Application) : ViewModel() {
         splashViewModelScope.launch {
             try {
                 teamsRepository.refreshTeams()
-                _sendUserToStandingFragment.value = true
+                teamsRepository.refreshFootballTeams()
+                _sendUserToSelectorFragment.value = true
             } catch (networkError: IOException) {
                 Log.e("SplashViewModel", "Error fetching data: $networkError")
             }
@@ -52,7 +53,7 @@ class SplashViewModel(application: Application) : ViewModel() {
     }
 
     fun displayMainFragmentDone() {
-        _sendUserToStandingFragment.value = null
+        _sendUserToSelectorFragment.value = null
     }
 
     override fun onCleared() {

@@ -1,7 +1,5 @@
-package com.sambataro.ignacio.scoreboard.data
+package com.sambataro.ignacio.scoreboard.data.datanba
 
-
-import com.google.gson.annotations.SerializedName
 
 data class Link(
     val href: String,

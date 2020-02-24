@@ -21,9 +21,14 @@ class StandingViewModel(application: Application) : ViewModel() {
     private val teamsRepository = TeamsRepository(getDatabase(application))
 
     /**
-     * Teams that will be displayed on the Standing.
+     * Teams that will be displayed on the NBA Standing.
      */
     val teams = teamsRepository.teams
+
+    /**
+     * Teams that will be displayed on the Football Standing.
+     */
+    val footballTeams = teamsRepository.footballTeams
 
     /**
      * This is the job for all coroutines started by this ViewModel.

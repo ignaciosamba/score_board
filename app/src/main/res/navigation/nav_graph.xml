@@ -11,14 +11,34 @@
         android:label="title_fragment"
         tools:layout="@layout/splash_fragment">
         <action
-            android:id="@+id/action_showStandingFragment"
-            app:destination="@id/standing_id" />
+            android:id="@+id/action_showSelectorFragment"
+            app:destination="@id/selector_id" />
     </fragment>
+
+    <fragment
+        android:id="@+id/selector_id"
+        android:name="com.sambataro.ignacio.scoreboard.ui.fragment.selector.SelectorFragment"
+        android:label="title_fragment"
+        tools:layout="@layout/selector_fragment">
+        <action
+            android:id="@+id/action_shownbaStandingFragment"
+            app:destination="@id/standing_id" />
+        <action
+            android:id="@+id/action_showFootballStandingFragment"
+            app:destination="@id/football_standing_id" />
+    </fragment>
+
 
     <fragment
         android:id="@+id/standing_id"
         android:name="com.sambataro.ignacio.scoreboard.ui.fragment.standings.StandingFragment"
         android:label="title_fragment"
         tools:layout="@layout/standing_fragment"/>
+
+    <fragment
+        android:id="@+id/football_standing_id"
+        android:name="com.sambataro.ignacio.scoreboard.ui.fragment.standings.FootballStandingFragment"
+        android:label="title_fragment"
+        tools:layout="@layout/football_standing_fragment"/>
 
 </navigation>

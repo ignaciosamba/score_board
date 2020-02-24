@@ -1,4 +1,12 @@
 <resources>
     <string name="app_name">Score Board</string>
     <string name="splash_icon">splash icon</string>
+    <string name="teams_standing">TEAMS</string>
+    <string name="wins_standing">W</string>
+    <string name="losses_standing">L</string>
+    <string name="winningpercentage_standing">W%</string>
+    <string name="gb_standing">GB</string>
+    <string name="select_your_league">SELECT YOUR LEAGUE</string>
+    <string name="football_standing_header_points">Points</string>
+    <string name="football_standing_header_gp">GP</string>
 </resources>

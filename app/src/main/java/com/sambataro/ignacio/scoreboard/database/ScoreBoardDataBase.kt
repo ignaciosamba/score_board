@@ -5,7 +5,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-@Database(entities = [TeamsEntity::class], version = 1)
+@Database(entities = [TeamsEntity::class, FootballTeamEntity::class], version = 1)
 abstract class ScoreBoardDataBase: RoomDatabase() {
     abstract val teamsDao: TeamsDao
 }
@@ -19,7 +19,8 @@ fun getDatabase(context: Context): ScoreBoardDataBase {
                 context.applicationContext,
                 ScoreBoardDataBase::class.java,
                 "teams"
-            ).build()
+            ).fallbackToDestructiveMigration()
+                .build()
         }
     }
     return INSTANCE

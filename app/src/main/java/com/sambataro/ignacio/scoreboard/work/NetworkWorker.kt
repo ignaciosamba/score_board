@@ -19,6 +19,7 @@ class NetworkWorker(appContext: Context, params: WorkerParameters) :
 
         try {
             repository.refreshTeams( )
+            repository.refreshFootballTeams()
         } catch (e: HttpException) {
             return Result.retry()
         }

@@ -1,14 +1,11 @@
 package com.sambataro.ignacio.scoreboard.network
 
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
-import com.sambataro.ignacio.scoreboard.data.TeamsResponse
-import kotlinx.coroutines.Deferred
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.GET
 
 
-val NBA_BASE = "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/"
+val NBA_BASE = "https://site.api.espn.com/apis/site/v2/sports/"
 
 
 /**

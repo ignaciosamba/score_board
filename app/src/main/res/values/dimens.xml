@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="standing_texts">12sp</dimen>
+    <dimen name="standing_item_height">40dp</dimen>
+    <dimen name="tittle_selector">25sp</dimen>
+</resources>

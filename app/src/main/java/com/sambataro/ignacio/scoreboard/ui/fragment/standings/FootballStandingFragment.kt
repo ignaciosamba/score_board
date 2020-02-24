@@ -14,9 +14,10 @@ import com.sambataro.ignacio.scoreboard.R
 import com.sambataro.ignacio.scoreboard.databinding.StandingFragmentBinding
 import com.sambataro.ignacio.scoreboard.domain.FootballTeamInfo
 import com.sambataro.ignacio.scoreboard.domain.NBATeamInfo
+import com.sambataro.ignacio.scoreboard.ui.adapters.FootballStandingAdapter
 import com.sambataro.ignacio.scoreboard.ui.adapters.StandingAdapter
 
-class StandingFragment : Fragment(){
+class FootballStandingFragment : Fragment(){
 
     private lateinit var binding: StandingFragmentBinding
 
@@ -38,13 +39,14 @@ class StandingFragment : Fragment(){
 
         binding.standingViewModel = viewModel
 
-        val adapter = StandingAdapter()
+        val adapter = FootballStandingAdapter()
         binding.standingList.adapter = adapter
 
-        viewModel.teams.observe(viewLifecycleOwner, Observer<List<NBATeamInfo>> { teams->
-            teams.let {
-                Log.d("SAMBA1", "StandingFragment, observer: " + teams.size)
-                adapter.addHeaderAndSubmitListNBA(teams)
+        viewModel.footballTeams.observe(viewLifecycleOwner, Observer<List<FootballTeamInfo>> {
+                footballTeams->
+            footballTeams.let {
+                Log.d("SAMBA4", "FootballStandingFragment, observer: " + footballTeams.size)
+                adapter.addHeaderAndSubmitListFootball(footballTeams)
             }
         })
 
@@ -53,4 +55,5 @@ class StandingFragment : Fragment(){
 
         return binding.root
     }
+
 }

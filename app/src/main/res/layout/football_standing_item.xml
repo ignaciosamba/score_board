@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="footballTeamInfoStanding"
+            type="com.sambataro.ignacio.scoreboard.domain.FootballTeamInfo" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/playoff_seed"
+            android:layout_width="26dp"
+            android:layout_height="@dimen/standing_item_height"
+            android:textSize="@dimen/standing_texts"
+            android:gravity="center_vertical"
+            android:textAlignment="textStart"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:footballteamposition="@{footballTeamInfoStanding}"
+            tools:ignore="RtlCompat" />
+
+        <ImageView
+            android:id="@+id/logo_id"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/standing_item_height"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="5dp"
+            app:layout_constraintStart_toEndOf="@+id/playoff_seed"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@android:drawable/alert_light_frame"
+            app:footballlogoteam= "@{footballTeamInfoStanding}"/>
+
+        <TextView
+            android:id="@+id/team_name"
+            android:layout_width="103dp"
+            android:layout_height="@dimen/standing_item_height"
+            android:textSize="@dimen/standing_texts"
+            android:gravity="center_vertical"
+            android:textAlignment="textStart"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:text="TextView"
+            app:layout_constraintStart_toEndOf="@+id/logo_id"
+            app:layout_constraintTop_toTopOf="parent"
+            app:footballteamname="@{footballTeamInfoStanding}"
+            tools:ignore="RtlCompat" />
+
+        <TextView
+            android:id="@+id/team_wins"
+            android:layout_width="35dp"
+            android:layout_height="@dimen/standing_item_height"
+            android:textSize="@dimen/standing_texts"
+            android:gravity="center_vertical"
+            android:textAlignment="textStart"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="5dp"
+            android:text="TextView"
+            app:layout_constraintStart_toEndOf="@+id/team_name"
+            app:layout_constraintTop_toTopOf="parent"
+            app:footballteamwins="@{footballTeamInfoStanding}"
+            tools:ignore="RtlCompat" />
+
+        <TextView
+            android:id="@+id/team_losses"
+            android:layout_width="35dp"
+            android:layout_height="@dimen/standing_item_height"
+            android:textSize="@dimen/standing_texts"
+            android:gravity="center_vertical"
+            android:textAlignment="textStart"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="5dp"
+            android:text="TextView"
+            app:layout_constraintStart_toEndOf="@+id/team_wins"
+            app:layout_constraintTop_toTopOf="parent"
+            app:footballteamlosses="@{footballTeamInfoStanding}"
+            tools:ignore="RtlCompat" />
+
+        <TextView
+            android:id="@+id/team_winning_percentage"
+            android:layout_width="58dp"
+            android:layout_height="@dimen/standing_item_height"
+            android:textSize="@dimen/standing_texts"
+            android:gravity="center_vertical"
+            android:textAlignment="textStart"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="5dp"
+            android:text="TextView"
+            app:layout_constraintStart_toEndOf="@+id/team_losses"
+            app:layout_constraintTop_toTopOf="parent"
+            app:footballteamgamesplayed="@{footballTeamInfoStanding}"
+            tools:ignore="RtlCompat" />
+
+        <TextView
+            android:id="@+id/team_gb"
+            android:layout_width="56dp"
+            android:layout_height="@dimen/standing_item_height"
+            android:textSize="@dimen/standing_texts"
+            android:gravity="center_vertical"
+            android:textAlignment="textStart"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="5dp"
+            android:text="TextView"
+            app:layout_constraintStart_toEndOf="@+id/team_winning_percentage"
+            app:layout_constraintTop_toTopOf="parent"
+            app:footballTeampoints="@{footballTeamInfoStanding}"
+            tools:ignore="RtlCompat" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

@@ -1,4 +1,4 @@
-package com.sambataro.ignacio.scoreboard.data
+package com.sambataro.ignacio.scoreboard.data.datafootball
 
 
 import com.google.gson.annotations.SerializedName

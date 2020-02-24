@@ -8,10 +8,11 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.sambataro.ignacio.scoreboard.R
 import com.sambataro.ignacio.scoreboard.databinding.SplashFragmentBinding
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 
 class SplashFragment : Fragment() {
 
@@ -30,6 +31,8 @@ class SplashFragment : Fragment() {
             .get(SplashViewModel::class.java)
     }
 
+    val fragmentScope = CoroutineScope(Dispatchers.Main)
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         super.onCreate(savedInstanceState)
@@ -41,16 +44,15 @@ class SplashFragment : Fragment() {
             false
         )
         // Set the lifecycleOwner so DataBinding can observe LiveData
-        binding.setLifecycleOwner(viewLifecycleOwner)
+        binding.lifecycleOwner = viewLifecycleOwner
 
-        viewModel.sendUserToStandingFragment.observe(viewLifecycleOwner, Observer {
+        viewModel.sendUserToSelectorFragment.observe(viewLifecycleOwner, Observer {
             if ( null != it ) {
                 this.findNavController()
-                    .navigate(SplashFragmentDirections.actionShowStandingFragment())
+                    .navigate(SplashFragmentDirections.actionShowSelectorFragment())
                 viewModel.displayMainFragmentDone()
             }
         })
-
         return binding.root
     }
 }
