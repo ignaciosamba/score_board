@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/standing_id"
+        android:icon="@drawable/standing"
+        android:title="@string/manu_standings"/>
+
+    <item
+        android:id="@+id/game_score_id"
+        android:icon="@drawable/schedule"
+        android:title="@string/manu_games"/>
+
+</menu>

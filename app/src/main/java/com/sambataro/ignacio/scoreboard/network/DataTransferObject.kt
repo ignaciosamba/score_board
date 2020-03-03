@@ -1,5 +1,7 @@
 package com.sambataro.ignacio.scoreboard.network
 
+import com.sambataro.ignacio.scoreboard.data.dataeventfootball.Event
+import com.sambataro.ignacio.scoreboard.data.dataeventfootball.EventsResponse
 import com.sambataro.ignacio.scoreboard.data.datafootball.FootballTeamList
 import com.sambataro.ignacio.scoreboard.data.datafootball.FootballTeamResponse
 import com.sambataro.ignacio.scoreboard.data.datanba.League
@@ -7,6 +9,8 @@ import com.sambataro.ignacio.scoreboard.data.datanba.Team
 import com.sambataro.ignacio.scoreboard.data.datanba.NBATeamsResponse
 import com.sambataro.ignacio.scoreboard.database.FootballTeamEntity
 import com.sambataro.ignacio.scoreboard.database.TeamsEntity
+import com.sambataro.ignacio.scoreboard.database.YesterdayGamesScoreEntity
+import com.sambataro.ignacio.scoreboard.domain.GameScoreInfo
 
 
 val NBA_TEAM_PLAYOFF_SEED = 0
@@ -72,5 +76,22 @@ fun FootballTeamResponse.asDatabaseModel(): List<FootballTeamEntity> {
             lose = it.team.record.items[0].stats[FOOTBALL_TEAM_LOSSES].value.toString(),
             gamesPlayed = it.team.record.items[0].stats[FOOTBALL_TEAM_GAMES_PLAYED].value.toString(),
             points = it.team.record.items[0].stats[FOOTBALL_TEAM_POINTS].value.toString())
+    }
+}
+
+
+fun EventsResponse.asDataBaseModel(): List<YesterdayGamesScoreEntity> {
+    return events.map {
+        YesterdayGamesScoreEntity(
+            game_id = it.id,
+            home_name = it.competitions[0].competitors[0].team.displayName,
+            home_logo = it.competitions[0].competitors[0].team.logo,
+            home_score = it.competitions[0].competitors[0].score,
+            away_name = it.competitions[0].competitors[1].team.displayName,
+            away_logo = it.competitions[0].competitors[1].team.logo,
+            away_score = it.competitions[0].competitors[1].score,
+            game_status = it.status.type.detail,
+            game_date = it.date.substringBefore("T")
+            )
     }
 }

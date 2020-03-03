@@ -19,4 +19,10 @@ interface TeamsDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertFootballAll( teams: List<FootballTeamEntity>)
+
+    @Query("select * from yesterday_games_score_table")
+    fun getGamesYesterday(): LiveData<List<YesterdayGamesScoreEntity>>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertGamesYesterdayAll( teams: List<YesterdayGamesScoreEntity>)
 }

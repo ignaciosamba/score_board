@@ -22,3 +22,14 @@ data class FootballTeamInfo(
     val lose: String,
     val gamesPlayed : String,
     val points : String)
+
+data class GameScoreInfo(
+    val game_id: String,
+    val home_name: String,
+    val home_logo: String,
+    val home_score: String,
+    val away_name: String,
+    val away_logo: String,
+    val away_score : String,
+    val game_date : String,
+    val game_status : String)

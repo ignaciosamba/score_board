@@ -9,4 +9,6 @@
     <string name="select_your_league">SELECT YOUR LEAGUE</string>
     <string name="football_standing_header_points">Points</string>
     <string name="football_standing_header_gp">GP</string>
+    <string name="manu_standings">Standings</string>
+    <string name="manu_games">Games</string>
 </resources>
