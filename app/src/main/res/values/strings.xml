@@ -9,6 +9,8 @@
     <string name="select_your_league">SELECT YOUR LEAGUE</string>
     <string name="football_standing_header_points">Points</string>
     <string name="football_standing_header_gp">GP</string>
-    <string name="manu_standings">Standings</string>
-    <string name="manu_games">Games</string>
+    <string name="menu_standings">Standings</string>
+    <string name="menu_games">Games</string>
+    <string name="argument_in_selector_id">SportType</string>
+    <string name="is_from_selector">is from selector</string>
 </resources>

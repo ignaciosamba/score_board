@@ -1,7 +1,22 @@
 package com.sambataro.ignacio.scoreboard.domain
 
-import androidx.room.PrimaryKey
 
+
+abstract class SportTeamInfo(
+    val sportType: String,
+    val team_id: String,
+    val team_playoffseed: Int,
+    val team_name: String,
+    val team_logo: String,
+    val team_win: String,
+    val team_lose: String) {
+    class SPORTTYPE {
+        companion object {
+            val NBA = "nba"
+            val FOOTBALL = "football"
+        }
+    }
+}
 
 data class NBATeamInfo(
     val id: String,
@@ -10,8 +25,8 @@ data class NBATeamInfo(
     val logo: String,
     val win: String,
     val lose: String,
-    val winningPercentage : String,
-    val gb : String)
+    val winningPercentage: String,
+    val gb: String) : SportTeamInfo(SPORTTYPE.NBA, id, playoffseed, name, logo, win, lose)
 
 data class FootballTeamInfo(
     val id: String,
@@ -20,8 +35,8 @@ data class FootballTeamInfo(
     val logo: String,
     val win: String,
     val lose: String,
-    val gamesPlayed : String,
-    val points : String)
+    val gamesPlayed: String,
+    val points: String) : SportTeamInfo(SPORTTYPE.FOOTBALL, id, position, name, logo, win, lose)
 
 data class GameScoreInfo(
     val game_id: String,

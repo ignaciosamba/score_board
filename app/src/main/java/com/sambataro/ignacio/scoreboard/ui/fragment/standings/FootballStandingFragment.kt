@@ -2,9 +2,8 @@ package com.sambataro.ignacio.scoreboard.ui.fragment.standings
 
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -13,9 +12,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.sambataro.ignacio.scoreboard.R
 import com.sambataro.ignacio.scoreboard.databinding.StandingFragmentBinding
 import com.sambataro.ignacio.scoreboard.domain.FootballTeamInfo
-import com.sambataro.ignacio.scoreboard.domain.NBATeamInfo
-import com.sambataro.ignacio.scoreboard.ui.adapters.FootballStandingAdapter
-import com.sambataro.ignacio.scoreboard.ui.adapters.StandingAdapter
+import com.sambataro.ignacio.scoreboard.ui.adapters.StandingAdapterSuper
+import kotlinx.android.synthetic.main.activity_main.*
 
 class FootballStandingFragment : Fragment(){
 
@@ -26,6 +24,9 @@ class FootballStandingFragment : Fragment(){
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         super.onCreate(savedInstanceState)
+
+        (activity as AppCompatActivity).bottom_nav.menu.getItem(0).isVisible = true
+        (activity as AppCompatActivity).bottom_nav.menu.getItem(1).isVisible = false
 
         val application = requireNotNull(activity).application
         binding = DataBindingUtil.inflate(inflater, R.layout.standing_fragment,
@@ -39,7 +40,7 @@ class FootballStandingFragment : Fragment(){
 
         binding.standingViewModel = viewModel
 
-        val adapter = FootballStandingAdapter()
+        val adapter = StandingAdapterSuper()
         binding.standingList.adapter = adapter
 
         viewModel.footballTeams.observe(viewLifecycleOwner, Observer<List<FootballTeamInfo>> {

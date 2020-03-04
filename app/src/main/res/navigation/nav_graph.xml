@@ -25,13 +25,10 @@
         tools:layout="@layout/selector_fragment">
         <action
             android:id="@+id/action_shownbaStandingFragment"
-            app:destination="@id/standing_id" />
+            app:destination="@id/standing_id"/>
         <action
             android:id="@+id/action_showFootballStandingFragment"
-            app:destination="@id/football_standing_id" />
-        <action
-            android:id="@+id/action_selector_id_to_game_score_id"
-            app:destination="@id/game_score_id" />
+            app:destination="@id/football_standing_id"/>
     </fragment>
 
 
@@ -45,7 +42,7 @@
         android:id="@+id/football_standing_id"
         android:name="com.sambataro.ignacio.scoreboard.ui.fragment.standings.FootballStandingFragment"
         android:label="title_fragment"
-        tools:layout="@layout/football_standing_fragment"/>
+        tools:layout="@layout/standing_fragment"/>
 
     <fragment
         android:id="@+id/game_score_id"

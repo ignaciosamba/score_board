@@ -12,13 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.sambataro.ignacio.scoreboard.R
 import com.sambataro.ignacio.scoreboard.databinding.GamesScoresFragmentBinding
-import com.sambataro.ignacio.scoreboard.databinding.StandingFragmentBinding
-import com.sambataro.ignacio.scoreboard.domain.GameScoreInfo
-import com.sambataro.ignacio.scoreboard.domain.NBATeamInfo
 import com.sambataro.ignacio.scoreboard.ui.adapters.GameScoreAdapter
-import com.sambataro.ignacio.scoreboard.ui.adapters.StandingAdapter
-import com.sambataro.ignacio.scoreboard.ui.fragment.standings.StandingViewModel
-import com.sambataro.ignacio.scoreboard.ui.fragment.standings.StandingViewModelFactory
 
 class GameScoreFragment : Fragment(){
 
