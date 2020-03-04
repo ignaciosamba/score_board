@@ -25,10 +25,12 @@
         tools:layout="@layout/selector_fragment">
         <action
             android:id="@+id/action_shownbaStandingFragment"
-            app:destination="@id/standing_id"/>
+            app:destination="@id/standing_id"
+            app:popUpTo="@+id/selector_id"/>
         <action
             android:id="@+id/action_showFootballStandingFragment"
-            app:destination="@id/football_standing_id"/>
+            app:destination="@id/football_standing_id"
+            app:popUpTo="@+id/selector_id"/>
     </fragment>
 
 
@@ -36,18 +38,30 @@
         android:id="@+id/standing_id"
         android:name="com.sambataro.ignacio.scoreboard.ui.fragment.standings.StandingFragment"
         android:label="title_fragment"
-        tools:layout="@layout/standing_fragment"/>
+        tools:layout="@layout/standing_fragment">
+        <action
+            android:id="@+id/action_returnToSelector"
+            app:destination="@id/selector_id"/>
+    </fragment>
 
     <fragment
         android:id="@+id/football_standing_id"
         android:name="com.sambataro.ignacio.scoreboard.ui.fragment.standings.FootballStandingFragment"
         android:label="title_fragment"
-        tools:layout="@layout/standing_fragment"/>
+        tools:layout="@layout/standing_fragment">
+        <action
+            android:id="@+id/action_returnToSelector"
+            app:destination="@id/selector_id"/>
+    </fragment>
 
     <fragment
         android:id="@+id/game_score_id"
         android:name="com.sambataro.ignacio.scoreboard.ui.fragment.gamescore.GameScoreFragment"
         android:label="title_fragment"
-        tools:layout="@layout/games_scores_fragment"/>
+        tools:layout="@layout/games_scores_fragment">
+        <action
+            android:id="@+id/action_returnToSelector"
+            app:destination="@id/selector_id"/>
+    </fragment>
 
 </navigation>
