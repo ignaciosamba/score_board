@@ -21,7 +21,7 @@
     <fragment
         android:id="@+id/selector_id"
         android:name="com.sambataro.ignacio.scoreboard.ui.fragment.selector.SelectorFragment"
-        android:label="title_fragment"
+        android:label=""
         tools:layout="@layout/selector_fragment">
         <action
             android:id="@+id/action_shownbaStandingFragment"
@@ -37,7 +37,7 @@
     <fragment
         android:id="@+id/standing_id"
         android:name="com.sambataro.ignacio.scoreboard.ui.fragment.standings.StandingFragment"
-        android:label="title_fragment"
+        android:label=""
         tools:layout="@layout/standing_fragment">
         <action
             android:id="@+id/action_returnToSelector"
@@ -47,7 +47,7 @@
     <fragment
         android:id="@+id/football_standing_id"
         android:name="com.sambataro.ignacio.scoreboard.ui.fragment.standings.FootballStandingFragment"
-        android:label="title_fragment"
+        android:label=""
         tools:layout="@layout/standing_fragment">
         <action
             android:id="@+id/action_returnToSelector"
@@ -57,7 +57,7 @@
     <fragment
         android:id="@+id/game_score_id"
         android:name="com.sambataro.ignacio.scoreboard.ui.fragment.gamescore.GameScoreFragment"
-        android:label="title_fragment"
+        android:label="Results"
         tools:layout="@layout/games_scores_fragment">
         <action
             android:id="@+id/action_returnToSelector"

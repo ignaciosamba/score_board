@@ -45,8 +45,13 @@ class StandingFragment : Fragment(){
 
         viewModel.teams.observe(viewLifecycleOwner, Observer<List<NBATeamInfo>> { teams->
             teams.let {
-                Log.d("SAMBA1", "StandingFragment, observer: " + teams.size)
                 adapter.addHeaderAndSubmitListNBA(teams)
+            }
+        })
+
+        viewModel.basketBallLeague.observe(viewLifecycleOwner, Observer {league ->
+            league?.let {
+                (activity as AppCompatActivity).supportActionBar?.title = league
             }
         })
 

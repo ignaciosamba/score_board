@@ -21,6 +21,8 @@ const val DATE_FORMAT = "yyyy-MM-dd"
 
 class GamesRepository(private val database: ScoreBoardDataBase) {
 
+    private val TAG = "GamesRepository"
+
     val games: LiveData<List<GameScoreInfo>> = Transformations.map(database.teamsDao.getGamesYesterday()) {
         it.asGameScoreDomainModel()
     }
@@ -30,19 +32,15 @@ class GamesRepository(private val database: ScoreBoardDataBase) {
      */
     suspend fun refreshYesterdayGames() {
         withContext(Dispatchers.IO) {
-            Log.d("SAMBA5", "About to call the getYesterdayGames")
             try {
                 val dateFormat = SimpleDateFormat(DATE_FORMAT, Locale.getDefault())
                 val calendar = Calendar.getInstance()
                 calendar.add(Calendar.DATE, -1)
                 val date = dateFormat.format(calendar.time).toString().replace("-", "")
-                Log.d("SAMBA5", "Date is: $date")
                 val yesterdayGamesScoreList = TeamsNetwork.teamsResponse.getBasketballGamesForYesterday("nba", date).await()
                 database.teamsDao.insertGamesYesterdayAll(yesterdayGamesScoreList.asDataBaseModel())
-                Log.d("SAMBA5", "the awnser of the getBasketballGamesForYesterday is: " +
-                        yesterdayGamesScoreList.events.size)
             } catch (e : Exception) {
-                Log.e("SAMBA5", "error with retrofit: $e")
+                Log.e(TAG, "error with retrofit: $e")
             }
         }
     }

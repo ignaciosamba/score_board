@@ -26,6 +26,16 @@ class StandingViewModel(application: Application) : ViewModel() {
     val teams = teamsRepository.teams
 
     /**
+     * League name that will be displayed on the NBA Standing as Title.
+     */
+    val basketBallLeague = teamsRepository.nbaLeagueName
+
+    /**
+     * League name that will be displayed on the NBA Standing as Title.
+     */
+    val footBallLeague = teamsRepository.footballLeagueName
+
+    /**
      * Teams that will be displayed on the Football Standing.
      */
     val footballTeams = teamsRepository.footballTeams
@@ -82,6 +92,7 @@ class StandingViewModel(application: Application) : ViewModel() {
         standingViewModelScope.launch {
             try {
                 teamsRepository.refreshTeams()
+                teamsRepository.refreshFootballTeams()
                 _eventNetworkError.value = false
                 _isNetworkErrorShown.value = false
             } catch (networkError: IOException) {

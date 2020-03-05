@@ -1,5 +1,6 @@
 package com.sambataro.ignacio.scoreboard.network
 
+import android.util.Log
 import com.sambataro.ignacio.scoreboard.data.dataeventfootball.Event
 import com.sambataro.ignacio.scoreboard.data.dataeventfootball.EventsResponse
 import com.sambataro.ignacio.scoreboard.data.datafootball.FootballTeamList
@@ -52,6 +53,21 @@ fun NBATeamsResponse.asDatabaseModel(): List<TeamsEntity> {
     }
 }
 
+fun NBATeamsResponse.getBasketBallLeagueName(): String {
+    var league = ArrayList<League>()
+    sports.forEach {
+        league = ArrayList(it.leagues)
+    }
+    return league[0].name
+}
+
+fun FootballTeamResponse.getFootBallLeagueName(): String {
+    var league = ArrayList<com.sambataro.ignacio.scoreboard.data.datafootball.League>()
+    sports.forEach {
+        league = ArrayList(it.leagues)
+    }
+    return league[0].name
+}
 
 /**
  * Convert NBA Network results to database objects

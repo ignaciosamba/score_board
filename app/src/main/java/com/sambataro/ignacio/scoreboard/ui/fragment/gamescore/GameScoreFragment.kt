@@ -41,7 +41,6 @@ class GameScoreFragment : Fragment(){
 
         viewModel.games.observe(viewLifecycleOwner, Observer { games->
             games?.let {
-                Log.d("SAMBA1", "StandingFragment, observer: " + games.size)
                 adapter.submitList(games)
             }
         })

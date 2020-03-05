@@ -46,8 +46,13 @@ class FootballStandingFragment : Fragment(){
         viewModel.footballTeams.observe(viewLifecycleOwner, Observer<List<FootballTeamInfo>> {
                 footballTeams->
             footballTeams.let {
-                Log.d("SAMBA4", "FootballStandingFragment, observer: " + footballTeams.size)
                 adapter.addHeaderAndSubmitListFootball(footballTeams)
+            }
+        })
+
+        viewModel.footBallLeague.observe(viewLifecycleOwner, Observer {league ->
+            league?.let {
+                (activity as AppCompatActivity).supportActionBar?.title = league
             }
         })
 
