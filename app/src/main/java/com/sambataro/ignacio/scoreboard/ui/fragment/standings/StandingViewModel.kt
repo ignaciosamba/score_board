@@ -1,19 +1,23 @@
 package com.sambataro.ignacio.scoreboard.ui.fragment.standings
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
+import com.sambataro.ignacio.scoreboard.data.datafootball.FootballTeamList
 import com.sambataro.ignacio.scoreboard.database.getDatabase
+import com.sambataro.ignacio.scoreboard.domain.FootballTeamInfo
 import com.sambataro.ignacio.scoreboard.repository.TeamsRepository
+import com.sambataro.ignacio.scoreboard.utils.getNameLeague
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
 import java.io.IOException
 
-class StandingViewModel(application: Application) : ViewModel() {
+class StandingViewModel(application: Application, leagueId: String) : ViewModel() {
 
     /**
      * We will use this repository to fetch the data.
@@ -30,15 +34,23 @@ class StandingViewModel(application: Application) : ViewModel() {
      */
     val basketBallLeague = teamsRepository.nbaLeagueName
 
+
+    private var _footBallLeague = MutableLiveData<String>()
     /**
      * League name that will be displayed on the NBA Standing as Title.
      */
-    val footBallLeague = teamsRepository.footballLeagueName
+    val footBallLeague : LiveData<String>
+        get() = _footBallLeague
 
     /**
      * Teams that will be displayed on the Football Standing.
      */
     val footballTeams = teamsRepository.footballTeams
+
+    private var _footballTeamsByLeague = MutableLiveData<List<FootballTeamInfo>>()
+
+    val footballTeamsByLeague: LiveData<List<FootballTeamInfo>>
+        get() = _footballTeamsByLeague
 
     /**
      * This is the job for all coroutines started by this ViewModel.
@@ -86,6 +98,17 @@ class StandingViewModel(application: Application) : ViewModel() {
      */
     init {
         fetchDataFromRepository()
+    }
+
+    fun fetchFootballTeamByLeague(teams: List<FootballTeamInfo>, leagueId: String) {
+        var teamsAux = ArrayList<FootballTeamInfo>()
+        teams.forEach {
+            if (leagueId == it.leagueName) {
+                teamsAux.add(it)
+            }
+        }
+        _footBallLeague.value = getNameLeague(leagueId)
+        _footballTeamsByLeague.value = teamsAux
     }
 
     private fun fetchDataFromRepository() {

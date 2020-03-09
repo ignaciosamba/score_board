@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
+import com.sambataro.ignacio.scoreboard.database.FootballTeamEntity
 import com.sambataro.ignacio.scoreboard.database.ScoreBoardDataBase
 import com.sambataro.ignacio.scoreboard.database.asFootballDomainModel
 import com.sambataro.ignacio.scoreboard.database.asNBADomainModel
@@ -58,17 +59,6 @@ class TeamsRepository(private val database : ScoreBoardDataBase) {
         get() = _nbaLeagueName
 
     /**
-     * MutableLiveData for update the name of the fragment into the SupportActionBar.
-     */
-    private var _footballLeagueName = MutableLiveData<String>()
-
-    /**
-     * LiveData for update the name of the fragment into the SupportActionBar.
-     */
-    val footballLeagueName: LiveData<String>
-        get() = _footballLeagueName
-
-    /**
      * Refresh the videos stored in the offline cache.
      */
     suspend fun refreshTeams() {
@@ -91,11 +81,10 @@ class TeamsRepository(private val database : ScoreBoardDataBase) {
     suspend fun refreshFootballTeams() {
         withContext(Dispatchers.IO) {
             try {
-                val footballTeamList = TeamsNetwork.teamsResponse.getFootballTeamList("arg.1").await()
-                database.teamsDao.insertFootballAll(footballTeamList.asDatabaseModel())
-                withContext(Dispatchers.Main) {
-                    _footballLeagueName.value = footballTeamList.getFootBallLeagueName()
-                }
+                val footballTeamList1 = TeamsNetwork.teamsResponse.getFootballTeamList("arg.1").await()
+                val footballTeamList2 = TeamsNetwork.teamsResponse.getFootballTeamList("arg.2").await()
+                database.teamsDao.insertFootballAll(footballTeamList1.asDatabaseModel())
+                database.teamsDao.insertFootballAll(footballTeamList2.asDatabaseModel())
             } catch (e : Exception) {
                 Log.e(TAG, "error with retrofit: $e")
             }

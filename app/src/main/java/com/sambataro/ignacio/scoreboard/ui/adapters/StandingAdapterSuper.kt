@@ -113,7 +113,6 @@ class StandingAdapterSuper : ListAdapter<DataItem2, RecyclerView.ViewHolder>(Tea
     class ViewHolderNBA private constructor(val binding: StandingItemBinding) : RecyclerView.ViewHolder(binding.root){
 
         fun bind(item: NBATeamInfo) {
-            Log.d("SAMBA1", "ADAPTER, HOLDER ITEMS ES: " + item.team_name)
             binding.teamInfoStanding = item
             binding.executePendingBindings()
         }
@@ -131,7 +130,6 @@ class StandingAdapterSuper : ListAdapter<DataItem2, RecyclerView.ViewHolder>(Tea
         RecyclerView.ViewHolder(binding.root){
 
         fun bind(item: FootballTeamInfo) {
-            Log.d("SAMBA1", "ADAPTER, HOLDER ITEMS ES: " + item.name)
             binding.footballTeamInfoStanding = item
             binding.executePendingBindings()
         }

@@ -9,7 +9,8 @@ abstract class SportTeamInfo(
     val team_name: String,
     val team_logo: String,
     val team_win: String,
-    val team_lose: String) {
+    val team_lose: String,
+    val team_leagueName: String) {
     class SPORTTYPE {
         companion object {
             val NBA = "nba"
@@ -26,7 +27,8 @@ data class NBATeamInfo(
     val win: String,
     val lose: String,
     val winningPercentage: String,
-    val gb: String) : SportTeamInfo(SPORTTYPE.NBA, id, playoffseed, name, logo, win, lose)
+    val gb: String,
+    val leagueName: String) : SportTeamInfo(SPORTTYPE.NBA, id, playoffseed, name, logo, win, lose, leagueName)
 
 data class FootballTeamInfo(
     val id: String,
@@ -36,7 +38,8 @@ data class FootballTeamInfo(
     val win: String,
     val lose: String,
     val gamesPlayed: String,
-    val points: String) : SportTeamInfo(SPORTTYPE.FOOTBALL, id, position, name, logo, win, lose)
+    val points: String,
+    val leagueName: String) : SportTeamInfo(SPORTTYPE.FOOTBALL, id, position, name, logo, win, lose, leagueName)
 
 data class GameScoreInfo(
     val game_id: String,

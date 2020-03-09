@@ -30,7 +30,11 @@
         <action
             android:id="@+id/action_showFootballStandingFragment"
             app:destination="@id/football_standing_id"
-            app:popUpTo="@+id/selector_id"/>
+            app:popUpTo="@+id/selector_id">
+            <argument
+                android:name="league"
+                app:argType="string" />
+        </action>
     </fragment>
 
 
@@ -49,6 +53,9 @@
         android:name="com.sambataro.ignacio.scoreboard.ui.fragment.standings.FootballStandingFragment"
         android:label=""
         tools:layout="@layout/standing_fragment">
+        <argument
+            android:name="league"
+            app:argType="string" />
         <action
             android:id="@+id/action_returnToSelector"
             app:destination="@id/selector_id"/>

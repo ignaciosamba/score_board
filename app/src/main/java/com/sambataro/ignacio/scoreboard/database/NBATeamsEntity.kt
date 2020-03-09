@@ -14,7 +14,8 @@ class TeamsEntity (
     val win: String,
     val lose: String,
     val winningPercentage : String,
-    val gb : String)
+    val gb : String,
+    val leagueName: String)
 
 /**
  * Map DatabaseVideos to domain entities
@@ -29,6 +30,7 @@ fun List<TeamsEntity>.asNBADomainModel(): List<NBATeamInfo> {
             win = it.win,
             lose = it.lose,
             winningPercentage = it.winningPercentage,
-            gb = it.gb)
+            gb = it.gb,
+            leagueName =  it.leagueName)
     }
 }

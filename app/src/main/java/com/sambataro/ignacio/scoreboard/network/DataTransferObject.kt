@@ -33,6 +33,7 @@ val FOOTBALL_TEAM_POINTS = 6
 fun NBATeamsResponse.asDatabaseModel(): List<TeamsEntity> {
     var league = ArrayList<League>()
     var teams = ArrayList<Team>()
+    val leagueToSave = sports[0].leagues[0].id
     sports.forEach {
         league = ArrayList(it.leagues)
     }
@@ -49,7 +50,8 @@ fun NBATeamsResponse.asDatabaseModel(): List<TeamsEntity> {
             win = it.team.record.items[0].stats[NBA_TEAM_WINS].value.toString(),
             lose = it.team.record.items[0].stats[NBA_TEAM_LOSSES].value.toString(),
             winningPercentage = it.team.record.items[0].stats[NBA_TEAM_WINNING_PERCENTAGE].value.toString(),
-            gb = it.team.record.items[0].stats[NBA_TEAM_GB].value.toString())
+            gb = it.team.record.items[0].stats[NBA_TEAM_GB].value.toString(),
+            leagueName = leagueToSave)
     }
 }
 
@@ -75,6 +77,7 @@ fun FootballTeamResponse.getFootBallLeagueName(): String {
 fun FootballTeamResponse.asDatabaseModel(): List<FootballTeamEntity> {
     var league = ArrayList<com.sambataro.ignacio.scoreboard.data.datafootball.League>()
     var teams = ArrayList<FootballTeamList>()
+    var leagueToSave = sports[0].leagues[0].id
     sports.forEach {
         league = ArrayList(it.leagues)
     }
@@ -91,7 +94,8 @@ fun FootballTeamResponse.asDatabaseModel(): List<FootballTeamEntity> {
             win = it.team.record.items[0].stats[FOOTBALL_TEAM_WIN].value.toString(),
             lose = it.team.record.items[0].stats[FOOTBALL_TEAM_LOSSES].value.toString(),
             gamesPlayed = it.team.record.items[0].stats[FOOTBALL_TEAM_GAMES_PLAYED].value.toString(),
-            points = it.team.record.items[0].stats[FOOTBALL_TEAM_POINTS].value.toString())
+            points = it.team.record.items[0].stats[FOOTBALL_TEAM_POINTS].value.toString(),
+            leagueName = leagueToSave)
     }
 }
 

@@ -1,6 +1,7 @@
 package com.sambataro.ignacio.scoreboard.ui.fragment.selector
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -51,11 +52,16 @@ class SelectorFragment : Fragment() {
                 (activity as AppCompatActivity).bottom_nav?.visibility = View.VISIBLE
             }
         })
+        var leagueName= String()
+        viewModel.leagueName.observe(viewLifecycleOwner, Observer {
+            leagueName = it
+        })
 
         viewModel.sendUserToFootballStandingFragment.observe(viewLifecycleOwner, Observer {
             if ( null != it ) {
                 this.findNavController()
-                    .navigate(SelectorFragmentDirections.actionShowFootballStandingFragment())
+                    .navigate(SelectorFragmentDirections
+                        .actionShowFootballStandingFragment(leagueName))
                 viewModel.displayFootballStandingFragmentDone()
                 (activity as AppCompatActivity).supportActionBar?.show()
                 (activity as AppCompatActivity).bottom_nav?.visibility = View.VISIBLE

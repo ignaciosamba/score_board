@@ -1,8 +1,10 @@
 package com.sambataro.ignacio.scoreboard.ui.fragment.selector
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.sambataro.ignacio.scoreboard.utils.LeaguesIds
 
 class SelectorViewModel : ViewModel() {
 
@@ -17,12 +19,22 @@ class SelectorViewModel : ViewModel() {
     val sendUserToFootballStandingFragment : LiveData<Boolean>
         get() = _sendUserToFootballStandingFragment
 
+    var _leagueName = MutableLiveData<String>()
+
+    val leagueName : LiveData<String>
+        get() = _leagueName
 
     fun nbaClick() {
         _sendUserToNBAStandingFragment.value = true
     }
 
-    fun argFootballClick() {
+    fun arg1FootballClick() {
+        _leagueName.value = LeaguesIds.SUPER_LIGA_ARGENTINA
+        _sendUserToFootballStandingFragment.value = true
+    }
+
+    fun arg2FootballClick() {
+        _leagueName.value = LeaguesIds.PRIMER_B_NACIONAL
         _sendUserToFootballStandingFragment.value = true
     }
 

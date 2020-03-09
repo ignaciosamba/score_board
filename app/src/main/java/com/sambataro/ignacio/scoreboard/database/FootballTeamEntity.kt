@@ -15,7 +15,8 @@ class FootballTeamEntity (
     val win: String,
     val lose: String,
     val gamesPlayed : String,
-    val points : String)
+    val points : String,
+    val leagueName: String)
 
 /**
  * Map DatabaseVideos to domain entities
@@ -30,6 +31,7 @@ fun List<FootballTeamEntity>.asFootballDomainModel(): List<FootballTeamInfo> {
             win = it.win,
             lose = it.lose,
             gamesPlayed = it.gamesPlayed,
-            points = it.points)
+            points = it.points,
+            leagueName = it.leagueName)
     }
 }

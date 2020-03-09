@@ -25,6 +25,8 @@ class FootballStandingFragment : Fragment(){
                               savedInstanceState: Bundle?): View? {
         super.onCreate(savedInstanceState)
 
+        val leagueId = FootballStandingFragmentArgs.fromBundle(arguments).league
+
         (activity as AppCompatActivity).bottom_nav.menu.getItem(0).isVisible = true
         (activity as AppCompatActivity).bottom_nav.menu.getItem(1).isVisible = false
 
@@ -34,7 +36,7 @@ class FootballStandingFragment : Fragment(){
 
         binding.lifecycleOwner = this
 
-        val standingViewModelFactory = StandingViewModelFactory(application)
+        val standingViewModelFactory = StandingViewModelFactory(application, leagueId)
         viewModel = ViewModelProvider(this, standingViewModelFactory)
             .get(StandingViewModel::class.java)
 
@@ -46,7 +48,8 @@ class FootballStandingFragment : Fragment(){
         viewModel.footballTeams.observe(viewLifecycleOwner, Observer<List<FootballTeamInfo>> {
                 footballTeams->
             footballTeams.let {
-                adapter.addHeaderAndSubmitListFootball(footballTeams)
+                viewModel.fetchFootballTeamByLeague(ArrayList<FootballTeamInfo>(footballTeams), leagueId)
+                adapter.addHeaderAndSubmitListFootball(viewModel.footballTeamsByLeague.value)
             }
         })
 
