@@ -33,11 +33,27 @@ class GamesRepository(private val database: ScoreBoardDataBase) {
     suspend fun refreshYesterdayGames() {
         withContext(Dispatchers.IO) {
             try {
+                database.teamsDao.deleteAllGames()
                 val dateFormat = SimpleDateFormat(DATE_FORMAT, Locale.getDefault())
                 val calendar = Calendar.getInstance()
                 calendar.add(Calendar.DATE, -1)
                 val date = dateFormat.format(calendar.time).toString().replace("-", "")
                 val yesterdayGamesScoreList = TeamsNetwork.teamsResponse.getBasketballGamesForYesterday("nba", date).await()
+                database.teamsDao.insertGamesYesterdayAll(yesterdayGamesScoreList.asDataBaseModel())
+            } catch (e : Exception) {
+                Log.e(TAG, "error with retrofit: $e")
+            }
+        }
+    }
+
+    suspend fun refreshGamesByDay(day: String) {
+        withContext(Dispatchers.IO) {
+            try {
+                database.teamsDao.deleteAllGames()
+
+                val yesterdayGamesScoreList = TeamsNetwork.teamsResponse
+                    .getBasketballGamesForYesterday("nba", day).await()
+
                 database.teamsDao.insertGamesYesterdayAll(yesterdayGamesScoreList.asDataBaseModel())
             } catch (e : Exception) {
                 Log.e(TAG, "error with retrofit: $e")

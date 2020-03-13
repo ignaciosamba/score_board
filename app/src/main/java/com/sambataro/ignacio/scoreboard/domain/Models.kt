@@ -51,3 +51,9 @@ data class GameScoreInfo(
     val away_score : String,
     val game_date : String,
     val game_status : String)
+
+data class DayCalendarInfo(
+    val dayName: String,
+    val dateInfo: String,
+    val dateFormatedToSelectOnClick: String,
+    var isSelected: Boolean)
