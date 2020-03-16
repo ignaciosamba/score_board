@@ -1,10 +1,13 @@
 package com.sambataro.ignacio.scoreboard.repository
 
+import android.content.Context
 import android.util.Log
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import com.sambataro.ignacio.scoreboard.database.ScoreBoardDataBase
 import com.sambataro.ignacio.scoreboard.database.asGameScoreDomainModel
+import com.sambataro.ignacio.scoreboard.database.getDatabase
 import com.sambataro.ignacio.scoreboard.domain.GameScoreInfo
 import com.sambataro.ignacio.scoreboard.network.TeamsNetwork
 import com.sambataro.ignacio.scoreboard.network.asDataBaseModel
@@ -30,7 +33,7 @@ class GamesRepository(private val database: ScoreBoardDataBase) {
     /**
      * Refresh the videos stored in the offline cache.
      */
-    suspend fun refreshYesterdayGames() {
+    suspend fun refreshYesterdayGames(sport: String, leagueName: String) {
         withContext(Dispatchers.IO) {
             try {
                 database.teamsDao.deleteAllGames()
@@ -38,7 +41,10 @@ class GamesRepository(private val database: ScoreBoardDataBase) {
                 val calendar = Calendar.getInstance()
                 calendar.add(Calendar.DATE, -1)
                 val date = dateFormat.format(calendar.time).toString().replace("-", "")
-                val yesterdayGamesScoreList = TeamsNetwork.teamsResponse.getBasketballGamesForYesterday("nba", date).await()
+
+                val yesterdayGamesScoreList = TeamsNetwork.teamsResponse
+                    .getBasketballGamesForYesterday(sport, leagueName, date).await()
+
                 database.teamsDao.insertGamesYesterdayAll(yesterdayGamesScoreList.asDataBaseModel())
             } catch (e : Exception) {
                 Log.e(TAG, "error with retrofit: $e")
@@ -46,13 +52,13 @@ class GamesRepository(private val database: ScoreBoardDataBase) {
         }
     }
 
-    suspend fun refreshGamesByDay(day: String) {
+    suspend fun refreshGamesByDay(sport: String, leagueName: String, day: String) {
         withContext(Dispatchers.IO) {
             try {
                 database.teamsDao.deleteAllGames()
 
                 val yesterdayGamesScoreList = TeamsNetwork.teamsResponse
-                    .getBasketballGamesForYesterday("nba", day).await()
+                    .getBasketballGamesForYesterday(sport, leagueName, day).await()
 
                 database.teamsDao.insertGamesYesterdayAll(yesterdayGamesScoreList.asDataBaseModel())
             } catch (e : Exception) {

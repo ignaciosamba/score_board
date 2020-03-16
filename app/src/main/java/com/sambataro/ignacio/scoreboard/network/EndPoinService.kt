@@ -20,11 +20,16 @@ interface EndPoinService {
     @GET("soccer/{league}/teams")
     fun getFootballTeamList(@Path("league") league: String): Deferred<FootballTeamResponse>
 
-    @GET("basketball/{league}/scoreboard")
-    fun getBasketballGamesForYesterday(@Path("league") league: String,
+    @GET("{sport}/{league}/scoreboard")
+    fun getBasketballGamesForYesterday(@Path("sport") sport: String,
+                                       @Path("league") league: String,
                              @Query("dates") date: String) : Deferred<EventsResponse>
 
     @GET("soccer/{league}/scoreboard")
     fun getFootballGamesForYesterday(@Path("league") league: String,
                              @Query("dates") date: String) : Deferred<EventsResponse>
 }
+
+//basketball
+
+//soccer

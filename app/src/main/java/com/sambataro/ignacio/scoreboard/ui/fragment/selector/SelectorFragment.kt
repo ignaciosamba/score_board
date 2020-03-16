@@ -13,7 +13,10 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.sambataro.ignacio.scoreboard.R
+import com.sambataro.ignacio.scoreboard.database.getDatabase
 import com.sambataro.ignacio.scoreboard.databinding.SelectorFragmentBinding
+import com.sambataro.ignacio.scoreboard.repository.ApplicationRepository
+import com.sambataro.ignacio.scoreboard.repository.GamesRepository
 import kotlinx.android.synthetic.main.activity_main.*
 
 class SelectorFragment : Fragment() {
@@ -28,6 +31,7 @@ class SelectorFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
+        val gameScoreRepository = GamesRepository(getDatabase((activity as AppCompatActivity)))
         (activity as AppCompatActivity).supportActionBar?.hide()
         (activity as AppCompatActivity).bottom_nav?.visibility = View.GONE
 
@@ -48,11 +52,18 @@ class SelectorFragment : Fragment() {
                     .navigate(SelectorFragmentDirections.actionShownbaStandingFragment())
                 viewModel.displayNBAStandingFragmentDone()
 
+                ApplicationRepository.instance.setLeagueName("nba")
+                ApplicationRepository.instance.setSportType("basketball")
+
                 (activity as AppCompatActivity).supportActionBar?.show()
                 (activity as AppCompatActivity).bottom_nav?.visibility = View.VISIBLE
             }
         })
-        var leagueName= String()
+        var leagueNameId = String()
+        viewModel.leagueNameId.observe(viewLifecycleOwner, Observer {
+            leagueNameId = it
+        })
+        var leagueName = String()
         viewModel.leagueName.observe(viewLifecycleOwner, Observer {
             leagueName = it
         })
@@ -61,7 +72,11 @@ class SelectorFragment : Fragment() {
             if ( null != it ) {
                 this.findNavController()
                     .navigate(SelectorFragmentDirections
-                        .actionShowFootballStandingFragment(leagueName))
+                        .actionShowFootballStandingFragment(leagueNameId))
+
+                ApplicationRepository.instance.setLeagueName(leagueName)
+                ApplicationRepository.instance.setSportType("soccer")
+
                 viewModel.displayFootballStandingFragmentDone()
                 (activity as AppCompatActivity).supportActionBar?.show()
                 (activity as AppCompatActivity).bottom_nav?.visibility = View.VISIBLE

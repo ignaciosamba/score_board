@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.work.ExistingPeriodicWorkPolicy
 import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
+import com.sambataro.ignacio.scoreboard.repository.ApplicationRepository
 import com.sambataro.ignacio.scoreboard.work.NetworkWorker
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -23,6 +24,7 @@ class ScoreApplication : Application() {
     }
 
     private fun delayedInit() {
+        ApplicationRepository.instance
         applicationScope.launch {
             setupRecurringWork()
         }

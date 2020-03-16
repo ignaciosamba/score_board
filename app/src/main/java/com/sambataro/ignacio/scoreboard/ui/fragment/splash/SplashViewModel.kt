@@ -50,7 +50,7 @@ class SplashViewModel(application: Application) : ViewModel() {
             try {
                 teamsRepository.refreshTeams()
                 teamsRepository.refreshFootballTeams()
-                gamesRepository.refreshYesterdayGames()
+//                gamesRepository.refreshYesterdayGames()
                 _sendUserToSelectorFragment.value = true
             } catch (networkError: IOException) {
                 Log.e("SplashViewModel", "Error fetching data: $networkError")

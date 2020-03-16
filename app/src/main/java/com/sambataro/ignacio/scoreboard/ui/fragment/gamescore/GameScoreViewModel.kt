@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.sambataro.ignacio.scoreboard.database.getDatabase
 import com.sambataro.ignacio.scoreboard.domain.DayCalendarInfo
+import com.sambataro.ignacio.scoreboard.repository.ApplicationRepository
 import com.sambataro.ignacio.scoreboard.repository.GamesRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -20,6 +21,13 @@ import kotlin.collections.ArrayList
 class GameScoreViewModel(application: Application) : ViewModel() {
 
     private val gameScoreRepository = GamesRepository(getDatabase(application))
+
+    /**
+     * League name that will be displayed on the NBA Standing as Title.
+     */
+    val leagueName = ApplicationRepository.instance.leagueName
+
+    val sportType = ApplicationRepository.instance.sportType
 
     val games = gameScoreRepository.games
 
@@ -110,9 +118,10 @@ class GameScoreViewModel(application: Application) : ViewModel() {
         gamesScoreViewModelScope.launch {
             try {
                 if (dayToShowGames.value != null) {
-                    gameScoreRepository.refreshGamesByDay(dayToShowGames.value!!)
+                    gameScoreRepository.refreshGamesByDay(sportType.value!!,
+                                    leagueName.value!!, dayToShowGames.value!!)
                 } else {
-                    gameScoreRepository.refreshYesterdayGames()
+                    gameScoreRepository.refreshYesterdayGames(sportType.value!!, leagueName.value!!)
                 }
                 _eventNetworkError.value = false
                 _isNetworkErrorShown.value = false

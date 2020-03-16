@@ -19,6 +19,11 @@ class SelectorViewModel : ViewModel() {
     val sendUserToFootballStandingFragment : LiveData<Boolean>
         get() = _sendUserToFootballStandingFragment
 
+    var _leagueNameId = MutableLiveData<String>()
+
+    val leagueNameId : LiveData<String>
+        get() = _leagueNameId
+
     var _leagueName = MutableLiveData<String>()
 
     val leagueName : LiveData<String>
@@ -29,12 +34,14 @@ class SelectorViewModel : ViewModel() {
     }
 
     fun arg1FootballClick() {
-        _leagueName.value = LeaguesIds.SUPER_LIGA_ARGENTINA
+        _leagueNameId.value = LeaguesIds.SUPER_LIGA_ARGENTINA
+        _leagueName.value = "arg.1"
         _sendUserToFootballStandingFragment.value = true
     }
 
     fun arg2FootballClick() {
-        _leagueName.value = LeaguesIds.PRIMER_B_NACIONAL
+        _leagueNameId.value = LeaguesIds.PRIMER_B_NACIONAL
+        _leagueName.value = "arg.2"
         _sendUserToFootballStandingFragment.value = true
     }
 
