@@ -11,6 +11,7 @@
     <string name="football_standing_header_gp">GP</string>
     <string name="menu_standings">Standings</string>
     <string name="menu_games">Games</string>
+    <string name="menu_news">News</string>
     <string name="argument_in_selector_id">SportType</string>
     <string name="is_from_selector">is from selector</string>
 </resources>

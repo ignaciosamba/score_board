@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.sambataro.ignacio.scoreboard.database.getDatabase
 import com.sambataro.ignacio.scoreboard.repository.GamesRepository
+import com.sambataro.ignacio.scoreboard.repository.NewsRepository
 import com.sambataro.ignacio.scoreboard.repository.TeamsRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -23,6 +24,8 @@ class SplashViewModel(application: Application) : ViewModel() {
 
     private val gamesRepository = GamesRepository(getDatabase(application))
 
+    private val newsRepository = NewsRepository(getDatabase(application))
+
     /**
      * Teams that will be displayed on the Standing.
      */
@@ -30,6 +33,8 @@ class SplashViewModel(application: Application) : ViewModel() {
 
 
     val games = gamesRepository.games
+
+    val news = newsRepository.news
 
     private val splashViewModelJob = SupervisorJob()
 

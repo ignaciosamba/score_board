@@ -71,4 +71,14 @@
             app:destination="@id/selector_id"/>
     </fragment>
 
+    <fragment
+        android:id="@+id/league_news_id"
+        android:name="com.sambataro.ignacio.scoreboard.ui.fragment.news.NewsFragment"
+        android:label="News"
+        tools:layout="@layout/news_fragment">
+        <action
+            android:id="@+id/action_returnToSelector"
+            app:destination="@id/selector_id"/>
+    </fragment>
+
 </navigation>

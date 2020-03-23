@@ -15,4 +15,9 @@
         android:id="@+id/game_score_id"
         android:icon="@drawable/schedule"
         android:title= "@string/menu_games"/>
+
+    <item
+        android:id="@+id/league_news_id"
+        android:icon="@drawable/news"
+        android:title= "@string/menu_news"/>
 </menu>

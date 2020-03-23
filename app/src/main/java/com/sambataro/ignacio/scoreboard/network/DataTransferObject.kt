@@ -8,10 +8,13 @@ import com.sambataro.ignacio.scoreboard.data.datafootball.FootballTeamResponse
 import com.sambataro.ignacio.scoreboard.data.datanba.League
 import com.sambataro.ignacio.scoreboard.data.datanba.Team
 import com.sambataro.ignacio.scoreboard.data.datanba.NBATeamsResponse
+import com.sambataro.ignacio.scoreboard.data.datanews.NewsResponse
 import com.sambataro.ignacio.scoreboard.database.FootballTeamEntity
+import com.sambataro.ignacio.scoreboard.database.NewsEntity
 import com.sambataro.ignacio.scoreboard.database.TeamsEntity
 import com.sambataro.ignacio.scoreboard.database.YesterdayGamesScoreEntity
 import com.sambataro.ignacio.scoreboard.domain.GameScoreInfo
+import com.sambataro.ignacio.scoreboard.domain.NewsInfo
 
 
 val NBA_TEAM_PLAYOFF_SEED = 0
@@ -113,5 +116,20 @@ fun EventsResponse.asDataBaseModel(): List<YesterdayGamesScoreEntity> {
             game_status = it.status.type.detail,
             game_date = it.date.substringBefore("T")
             )
+    }
+}
+
+fun NewsResponse.asDataBaseModel(): List<NewsEntity> {
+    return articles.map {
+        var descriptionIfNull = String()
+        if (!it.description.isNullOrBlank()){
+            descriptionIfNull = it.description
+        }
+        NewsEntity(
+            id = it.hashCode(),
+            image = it.images[0].url,
+            description = descriptionIfNull,
+            headline = it.headline,
+            storyLink = it.links.api.news.href)
     }
 }

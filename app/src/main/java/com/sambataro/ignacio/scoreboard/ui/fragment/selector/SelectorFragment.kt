@@ -31,7 +31,6 @@ class SelectorFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        val gameScoreRepository = GamesRepository(getDatabase((activity as AppCompatActivity)))
         (activity as AppCompatActivity).supportActionBar?.hide()
         (activity as AppCompatActivity).bottom_nav?.visibility = View.GONE
 
@@ -73,11 +72,11 @@ class SelectorFragment : Fragment() {
                 this.findNavController()
                     .navigate(SelectorFragmentDirections
                         .actionShowFootballStandingFragment(leagueNameId))
+                viewModel.displayFootballStandingFragmentDone()
 
                 ApplicationRepository.instance.setLeagueName(leagueName)
-                ApplicationRepository.instance.setSportType("soccer")
+                ApplicationRepository.instance.setLeagueId(leagueNameId)
 
-                viewModel.displayFootballStandingFragmentDone()
                 (activity as AppCompatActivity).supportActionBar?.show()
                 (activity as AppCompatActivity).bottom_nav?.visibility = View.VISIBLE
             }

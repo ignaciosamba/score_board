@@ -8,7 +8,6 @@ import com.sambataro.ignacio.scoreboard.utils.LeaguesIds
 
 class SelectorViewModel : ViewModel() {
 
-
     private val _sendUserToNBAStandingFragment = MutableLiveData<Boolean>()
 
     val sendUserToNBAStandingFragment : LiveData<Boolean>
@@ -50,6 +49,7 @@ class SelectorViewModel : ViewModel() {
     }
 
     fun displayFootballStandingFragmentDone() {
+
         _sendUserToFootballStandingFragment.value = null
     }
 }

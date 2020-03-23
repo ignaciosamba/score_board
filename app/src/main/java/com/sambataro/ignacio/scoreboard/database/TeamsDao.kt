@@ -32,4 +32,13 @@ interface TeamsDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertGamesYesterdayAll( teams: List<YesterdayGamesScoreEntity>)
+
+    @Query("select * from news_table")
+    fun getNews(): LiveData<List<NewsEntity>>
+
+    @Query("DELETE FROM news_table")
+    fun deleteAllNews()
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertAllNews( news: List<NewsEntity>)
 }

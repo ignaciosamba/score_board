@@ -47,7 +47,7 @@ fun TextView.setTeamLosses(item: NBATeamInfo?) {
 @BindingAdapter("teamwinningpercentage")
 fun TextView.setTeamWinningPercentage(item: NBATeamInfo?) {
     item?.let {
-        text = item.winningPercentage.substring(0,6)
+        text = item.winningPercentage.substring(0,5)
     }
 }
 

@@ -34,7 +34,7 @@ class StandingFragment : Fragment(){
 
         binding.lifecycleOwner = this
 
-        val standingViewModelFactory = StandingViewModelFactory(application, "")
+        val standingViewModelFactory = StandingViewModelFactory(application)
         viewModel = ViewModelProvider(this, standingViewModelFactory)
             .get(StandingViewModel::class.java)
 

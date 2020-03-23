@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModel
 import com.sambataro.ignacio.scoreboard.data.datafootball.FootballTeamList
 import com.sambataro.ignacio.scoreboard.database.getDatabase
 import com.sambataro.ignacio.scoreboard.domain.FootballTeamInfo
+import com.sambataro.ignacio.scoreboard.repository.ApplicationRepository
 import com.sambataro.ignacio.scoreboard.repository.TeamsRepository
 import com.sambataro.ignacio.scoreboard.utils.getNameLeague
 import kotlinx.coroutines.CoroutineScope
@@ -17,7 +18,7 @@ import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
 import java.io.IOException
 
-class StandingViewModel(application: Application, leagueId: String) : ViewModel() {
+class StandingViewModel(application: Application) : ViewModel() {
 
     /**
      * We will use this repository to fetch the data.
@@ -52,6 +53,8 @@ class StandingViewModel(application: Application, leagueId: String) : ViewModel(
     val footballTeamsByLeague: LiveData<List<FootballTeamInfo>>
         get() = _footballTeamsByLeague
 
+
+    val footballLeagueId = ApplicationRepository.instance.leagueId
     /**
      * This is the job for all coroutines started by this ViewModel.
      *

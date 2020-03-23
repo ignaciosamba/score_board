@@ -45,6 +45,10 @@ class MainActivity : AppCompatActivity() {
                 navController.navigate(FootballStandingFragmentDirections.actionReturnToSelector())
                 true
             }
+            R.id.league_news_id-> {
+                navController.navigate(FootballStandingFragmentDirections.actionReturnToSelector())
+                true
+            }
             else -> navController.navigateUp()
         }
     }

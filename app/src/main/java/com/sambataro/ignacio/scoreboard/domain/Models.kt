@@ -57,3 +57,9 @@ data class DayCalendarInfo(
     val dateInfo: String,
     val dateFormatedToSelectOnClick: String,
     var isSelected: Boolean)
+
+data class NewsInfo(
+    val image: String,
+    val description: String,
+    val headline: String,
+    var storyLink: String)

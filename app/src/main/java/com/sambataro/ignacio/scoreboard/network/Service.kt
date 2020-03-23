@@ -20,5 +20,5 @@ object TeamsNetwork {
         .addCallAdapterFactory(CoroutineCallAdapterFactory())
         .build()
 
-    val teamsResponse = retrofit.create(EndPoinService::class.java)
+    val response = retrofit.create(EndPoinService::class.java)
 }

@@ -7,8 +7,9 @@ import androidx.room.RoomDatabase
 
 @Database(entities = [TeamsEntity::class,
                       FootballTeamEntity::class,
-                      YesterdayGamesScoreEntity::class],
-                      version = 2)
+                      YesterdayGamesScoreEntity::class,
+                      NewsEntity::class],
+                      version = 3)
 abstract class ScoreBoardDataBase: RoomDatabase() {
     abstract val teamsDao: TeamsDao
 }

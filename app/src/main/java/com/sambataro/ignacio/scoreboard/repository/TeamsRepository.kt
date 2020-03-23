@@ -4,7 +4,6 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
-import com.sambataro.ignacio.scoreboard.database.FootballTeamEntity
 import com.sambataro.ignacio.scoreboard.database.ScoreBoardDataBase
 import com.sambataro.ignacio.scoreboard.database.asFootballDomainModel
 import com.sambataro.ignacio.scoreboard.database.asNBADomainModel
@@ -13,7 +12,6 @@ import com.sambataro.ignacio.scoreboard.domain.NBATeamInfo
 import com.sambataro.ignacio.scoreboard.network.TeamsNetwork
 import com.sambataro.ignacio.scoreboard.network.asDatabaseModel
 import com.sambataro.ignacio.scoreboard.network.getBasketBallLeagueName
-import com.sambataro.ignacio.scoreboard.network.getFootBallLeagueName
 import com.sambataro.ignacio.scoreboard.utils.eastConferenceTeams
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -64,7 +62,7 @@ class TeamsRepository(private val database : ScoreBoardDataBase) {
     suspend fun refreshTeams() {
         withContext(Dispatchers.IO) {
             try {
-                val nbaTeamList = TeamsNetwork.teamsResponse.getTeamList("nba").await()
+                val nbaTeamList = TeamsNetwork.response.getTeamList("nba").await()
                 database.teamsDao.insertAll(nbaTeamList.asDatabaseModel())
                 withContext(Dispatchers.Main) {
                     _nbaLeagueName.value = nbaTeamList.getBasketBallLeagueName()
@@ -81,8 +79,8 @@ class TeamsRepository(private val database : ScoreBoardDataBase) {
     suspend fun refreshFootballTeams() {
         withContext(Dispatchers.IO) {
             try {
-                val footballTeamList1 = TeamsNetwork.teamsResponse.getFootballTeamList("arg.1").await()
-                val footballTeamList2 = TeamsNetwork.teamsResponse.getFootballTeamList("arg.2").await()
+                val footballTeamList1 = TeamsNetwork.response.getFootballTeamList("arg.1").await()
+                val footballTeamList2 = TeamsNetwork.response.getFootballTeamList("arg.2").await()
                 database.teamsDao.insertFootballAll(footballTeamList1.asDatabaseModel())
                 database.teamsDao.insertFootballAll(footballTeamList2.asDatabaseModel())
             } catch (e : Exception) {

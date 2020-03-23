@@ -3,6 +3,7 @@ package com.sambataro.ignacio.scoreboard.network
 import com.sambataro.ignacio.scoreboard.data.dataeventfootball.EventsResponse
 import com.sambataro.ignacio.scoreboard.data.datafootball.FootballTeamResponse
 import com.sambataro.ignacio.scoreboard.data.datanba.NBATeamsResponse
+import com.sambataro.ignacio.scoreboard.data.datanews.NewsResponse
 import kotlinx.coroutines.Deferred
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -23,11 +24,11 @@ interface EndPoinService {
     @GET("{sport}/{league}/scoreboard")
     fun getBasketballGamesForYesterday(@Path("sport") sport: String,
                                        @Path("league") league: String,
-                             @Query("dates") date: String) : Deferred<EventsResponse>
+                                       @Query("dates") date: String) : Deferred<EventsResponse>
 
-    @GET("soccer/{league}/scoreboard")
-    fun getFootballGamesForYesterday(@Path("league") league: String,
-                             @Query("dates") date: String) : Deferred<EventsResponse>
+    @GET("{sport}/{league}/news")
+    fun getNewsBySport(@Path("sport") sport: String,
+                       @Path("league") league: String) : Deferred<NewsResponse>
 }
 
 //basketball

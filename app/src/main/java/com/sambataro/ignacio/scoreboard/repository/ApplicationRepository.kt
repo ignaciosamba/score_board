@@ -22,6 +22,17 @@ class ApplicationRepository {
     val leagueName: LiveData<String>
         get() = _leagueName
 
+    /**
+     * MutableLiveData for update the name of the fragment into the SupportActionBar.
+     */
+    private var _leagueId = MutableLiveData<String>()
+
+    /**
+     * LiveData for update the name of the fragment into the SupportActionBar.
+     */
+    val leagueId: LiveData<String>
+        get() = _leagueId
+
 
     private var _sportType = MutableLiveData<String>()
 
@@ -30,6 +41,10 @@ class ApplicationRepository {
 
     fun setLeagueName(name: String) {
         _leagueName.value = name
+    }
+
+    fun setLeagueId(id: String) {
+        _leagueId.value = id
     }
 
     fun setSportType(sportType: String) {
